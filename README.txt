@@ -24,7 +24,6 @@ Adding subscribers also supports merge vars, the supported merge vars are:
 - company
 - website
 - phone
-- address
 - city
 - country
 - custom
@@ -55,6 +54,14 @@ You can get the UUID's of those contactlists from your account in the ListShine 
         require_once("/php-listshine-api/ListShine_Api.php");
         $connection = new ListShine_Api($API_KEY);
         $connection-> unsubscribeUser($list_id, $email);
+   ?>
+
+3. Getting only contactlists that have a signupform associated with them
+   <?php
+        require_once("/php-listshine-api/ListShine_Api.php");
+        $connection = new ListShine_Api($API_KEY);
+        $contactlists = $connection-> getContactlistsWithForms();
+        print_r($contactlists); //this will print out the array containing all of the contactlists that have signupforms
    ?>
 
 
