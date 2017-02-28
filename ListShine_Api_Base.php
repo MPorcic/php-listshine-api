@@ -26,7 +26,11 @@ class ListShine_Api_Base
             $response['http_code'] = $server_response['http_code'];
             return $response;
         } else {
-            die("An error has happened here at ListShine HQ while connecting to our servers, please standby and try again later!");
+            curl_close($cSession);
+            $response = json_decode($result);
+            $response['http_code'] = $server_response['http_code'];
+            echo "There was an error getting the contactlists";
+            return $response;
         }
     }
     public function getContactlistsWithForms(){
@@ -51,7 +55,10 @@ class ListShine_Api_Base
             $with_forms['http_code'] = $server_response['http_code'];
             return $with_forms;
         } else {
-            die("An error has happened here at ListShine HQ while connecting to our servers, please standby and try again later!");
+            $response['message'] = curl_getinfo($cSession);
+            $response['http_code'] = $server_response['http_code'];
+            curl_close($cSession);
+            return $response;
         }
     }
     public function retrieve($list_id, $email){
